@@ -1,6 +1,6 @@
 // Задание 1
 function getArrayParams(arr) {
-    let min = 100, max = -100, sum = 0, avg = 0;
+    let min = Infinity, max = -Infinity, sum = 0, avg = 0;
     for ( let i = 0; i < arr.length; i++) {
       if ( arr[i] < min ) {
         min = arr[i];
@@ -9,10 +9,7 @@ function getArrayParams(arr) {
       }      
       sum += arr[i];
     }
-    
-    avg = sum / arr.length;
-    avg = avg.toFixed(2);
-    avg = Number(avg);
+    avg = Number((sum / arr.length).toFixed(2));
     return { min: min, max: max, avg: avg };
   }
 
@@ -27,10 +24,12 @@ function worker(arr) {
 
 function makeWork(arrOfArr, func) {
   let max = 0;
+  
   for ( let i = 0; i < func.length; i++) {
-    if ( func(arrOfArr[i]) > max) {
-      max = func(arrOfArr[i]);
-    }
+    const funcResult = func(arrOfArr[i]);
+    if (funcResult > max) {
+       max = funcResult;
+     }
     
   }
   
@@ -46,11 +45,8 @@ function worker2(arr) {
         min = arr[i];
       } if ( arr[i] > max ) {
         max = arr[i];
-      }      
-      difference = min - max;
-      difference = Math.abs(difference);
-      
+      }
     }
-  
-    return `Разность 2 чисел = ${difference}`;
+    difference = Math.abs(min - max);
+    return difference;
 }
